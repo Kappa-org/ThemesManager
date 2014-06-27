@@ -1,0 +1,22 @@
+services:
+	helper: Helper
+
+
+extensions:
+	themes: Kappa\ThemesManager\DI\ThemesManagerExtension
+
+
+themes:
+	*:
+		params:
+			message: Hello
+		helpers:
+			helper: @helper::process
+	section:
+		params:
+			themeDir: %appDir%
+		macros:
+			- Macro
+		pathsMasks:
+			presenter:
+				- test

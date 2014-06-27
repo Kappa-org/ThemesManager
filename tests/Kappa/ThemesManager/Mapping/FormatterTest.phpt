@@ -39,7 +39,7 @@ class FormatterTest extends MockTestCase
 
 	public function testGetFormattedPaths()
 	{
-		$masks = [':section:', ':modules:', ':module_2:', ':presenter:', ':action:', ':view:', ':themeDir:'];
+		$masks = [':themeName:', ':modules:', ':module_2:', ':presenter:', ':action:', ':view:', ':themeDir:'];
 		$expected = ['mySection', 'Module1/Module2', 'Module2', 'MyPresenter', 'myAction', 'myView', 'theme/dir'];
 		Assert::equal($expected, $this->formatter->getFormattedPaths($masks, 'theme/dir', 'mySection'));
 	}

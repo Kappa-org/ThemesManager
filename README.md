@@ -61,7 +61,6 @@ Usages [kdyby/autowired](https://github.com/Kdyby/Autowired/)
 ```php
 class BasePresenter extends Presenter
 {
-	use AutowireComponentFactories;
 	use AutowireProperties;
 
 	/**

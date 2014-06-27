@@ -12,7 +12,7 @@ namespace Kappa\ThemesManager;
 
 use Kappa\ThemesManager\Mapping\Formatter;
 use Kappa\ThemesManager\Mapping\MaskType;
-use Kappa\ThemesManager\Mapping\PathMaskProvider;
+use Kappa\ThemesManager\Mapping\PathMasksProvider;
 use Kappa\ThemesManager\Template\TemplateConfigurator;
 use Nette\Object;
 
@@ -28,7 +28,7 @@ class Theme extends Object
 	/** @var \Kappa\ThemesManager\Template\TemplateConfigurator */
 	private $templateConfigurator;
 
-	/** @var \Kappa\ThemesManager\Mapping\PathMaskProvider */
+	/** @var \Kappa\ThemesManager\Mapping\PathMasksProvider */
 	private $pathMaskProvider;
 
 	/** @var string */
@@ -37,10 +37,10 @@ class Theme extends Object
 	/**
 	 * @param Formatter $formatter
 	 * @param TemplateConfigurator $templateConfigurator
-	 * @param PathMaskProvider $pathMaskProvider
+	 * @param PathMasksProvider $pathMaskProvider
 	 * @param string $name
 	 */
-	public function __construct(Formatter $formatter, TemplateConfigurator $templateConfigurator, PathMaskProvider $pathMaskProvider, $name)
+	public function __construct(Formatter $formatter, TemplateConfigurator $templateConfigurator, PathMasksProvider $pathMaskProvider, $name)
 	{
 		$this->formatter = $formatter;
 		$this->templateConfigurator = $templateConfigurator;

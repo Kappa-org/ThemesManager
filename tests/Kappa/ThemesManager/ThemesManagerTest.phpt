@@ -38,7 +38,7 @@ class ThemesManagerTest extends MockTestCase
 	{
 		$formater = $this->mockista->create('Kappa\ThemesManager\Mapping\Formatter');
 		$templateConfigurator = $this->mockista->create('Kappa\ThemesManager\Template\TemplateConfigurator');
-		$pathMasksProvider = $this->mockista->create('Kappa\ThemesManager\Mapping\PathMaskProvider');
+		$pathMasksProvider = $this->mockista->create('Kappa\ThemesManager\Mapping\PathMasksProvider');
 		$theme = new Theme($formater, $templateConfigurator, $pathMasksProvider, 'myTheme');
 		Assert::type(get_class($this->themesManager), $this->themesManager->addTheme($theme));
 		Assert::equal($theme, $this->themesManager->getTheme('myTheme'));

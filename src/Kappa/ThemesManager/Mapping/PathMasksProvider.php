@@ -14,10 +14,10 @@ use Kappa\ThemesManager\InvalidArgumentException;
 use Nette\Object;
 
 /**
- * Class PathMaskProvider
+ * Class PathMasksProvider
  * @package Kappa\ThemesManager\Mapping
  */
-class PathMaskProvider extends Object
+class PathMasksProvider extends Object
 {
 	/** @var array */
 	private $masks = [];

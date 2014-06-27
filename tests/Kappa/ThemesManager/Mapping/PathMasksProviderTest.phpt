@@ -14,7 +14,7 @@ namespace Kappa\ThemesManager\Tests;
 
 use Kappa\Tester\TestCase;
 use Kappa\ThemesManager\Mapping\MaskType;
-use Kappa\ThemesManager\Mapping\PathMaskProvider;
+use Kappa\ThemesManager\Mapping\PathMasksProvider;
 use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
@@ -31,9 +31,9 @@ class PathMasksProviderTest extends TestCase
 			MaskType::PRESENTERS => ['presenters'],
 			MaskType::LAYOUTS => ['layouts']
 		];
-		Assert::type('Kappa\ThemesManager\Mapping\PathMaskProvider', new PathMaskProvider($masks));
+		Assert::type('Kappa\ThemesManager\Mapping\PathMasksProvider', new PathMasksProvider($masks));
 		Assert::throws(function () {
-			new PathMaskProvider([]);
+			new PathMasksProvider([]);
 		}, 'Kappa\ThemesManager\InvalidArgumentException');
 	}
 
@@ -43,7 +43,7 @@ class PathMasksProviderTest extends TestCase
 			MaskType::PRESENTERS => ['presenters'],
 			MaskType::LAYOUTS => ['layouts']
 		];
-		$pathMaskProvider = new PathMaskProvider($masks);
+		$pathMaskProvider = new PathMasksProvider($masks);
 		Assert::equal($masks[MaskType::PRESENTERS], $pathMaskProvider->getMasks(MaskType::PRESENTERS));
 		Assert::equal($masks[MaskType::LAYOUTS], $pathMaskProvider->getMasks(MaskType::LAYOUTS));
 	}

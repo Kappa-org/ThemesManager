@@ -15,7 +15,7 @@ namespace Kappa\ThemesManager\Tests;
 use Kappa\Tester\MockTestCase;
 use Kappa\ThemesManager\Mapping\Formatter;
 use Kappa\ThemesManager\Mapping\MaskType;
-use Kappa\ThemesManager\Mapping\PathMaskProvider;
+use Kappa\ThemesManager\Mapping\PathMasksProvider;
 use Kappa\ThemesManager\Template\TemplateConfigurator;
 use Kappa\ThemesManager\Theme;
 use Tester\Assert;
@@ -35,7 +35,7 @@ class ThemeTest extends MockTestCase
 	{
 		parent::setUp();
 		$templateConfigurator = new TemplateConfigurator(['themeDir' => __DIR__]);
-		$pathMaskProvider = new PathMaskProvider([
+		$pathMasksProvider = new PathMasksProvider([
 			MaskType::PRESENTERS => [':themeName:'],
 			MaskType::LAYOUTS => [':themeName:']
 		]);
@@ -44,7 +44,7 @@ class ThemeTest extends MockTestCase
 			'getPresenter' => $presenterMock
 		]);
 		$formatter = new Formatter($applicationMock);
-		$this->theme = new Theme($formatter, $templateConfigurator, $pathMaskProvider, 'myTheme');
+		$this->theme = new Theme($formatter, $templateConfigurator, $pathMasksProvider, 'myTheme');
 	}
 
 	public function testGetParameters()

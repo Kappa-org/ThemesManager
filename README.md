@@ -111,9 +111,7 @@ public function formatLayoutTemplateFiles()
 
     return $list;
 }
-```
 
-```php
 public function formatTemplateFiles()
 {
     $list = $this->theme->getFormatTemplateFiles();

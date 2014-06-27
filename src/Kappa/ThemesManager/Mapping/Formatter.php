@@ -50,16 +50,16 @@ class Formatter extends Object
 	/**
 	 * @param string $mask
 	 * @param string $themeDir
-	 * @param string $sectionName
+	 * @param string $themeName
 	 * @return string
 	 * @throws \Kappa\ThemesManager\InvalidArgumentException
 	 */
-	private function parseMask($mask, $themeDir, $sectionName)
+	private function parseMask($mask, $themeDir, $themeName)
 	{
 		$presenter = $this->application->getPresenter();
 		$moduleName = $this->getModuleName($presenter);
 		$replace = [
-			':section:' => $sectionName,
+			':themeName:' => $themeName,
 			':themeDir:' => $themeDir,
 			':view:' => $presenter->getView(),
 			':presenter:' => $this->getPresenterName($presenter),

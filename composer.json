@@ -20,6 +20,7 @@
 	},
 	"require-dev": {
 		"kappa/tester": "~1.1",
+		"janmarek/mockista": "~1.0",
 		"nette/nette": "@dev"
 	},
 	"autoload": {

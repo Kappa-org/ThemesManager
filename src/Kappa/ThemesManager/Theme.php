@@ -14,6 +14,7 @@ use Kappa\ThemesManager\Mapping\Formatter;
 use Kappa\ThemesManager\Mapping\MaskType;
 use Kappa\ThemesManager\Mapping\PathMasksProvider;
 use Kappa\ThemesManager\Template\TemplateConfigurator;
+use Nette\Application\UI\ITemplate;
 use Nette\Object;
 
 /**
@@ -91,5 +92,13 @@ class Theme extends Object
 		$masks = $this->pathMaskProvider->getMasks(MaskType::PRESENTERS);
 
 		return $this->formatter->getFormattedPaths($masks, $this->getParameter('themeDir'), $this->getName());
+	}
+
+	/**
+	 * @param ITemplate $template
+	 */
+	public function configureTemplate(ITemplate $template)
+	{
+		return $this->templateConfigurator->configureTemplate($template);
 	}
 } 

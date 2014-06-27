@@ -11,7 +11,9 @@
 namespace Kappa\ThemesManager\Template;
 
 use Kappa\ThemesManager\InvalidArgumentException;
+use Nette\Application\UI\ITemplate;
 use Nette\Object;
+use Nette\Utils\Callback;
 
 /**
  * Class TemplateConfigurator
@@ -42,6 +44,26 @@ class TemplateConfigurator extends Object
 		$this->parameters = $parameters;
 		$this->helpers = $helpers;
 		$this->macros = $macros;
+	}
+
+	/**
+	 * @param ITemplate $template
+	 * @return ITemplate
+	 */
+	public function configureTemplate(ITemplate $template)
+	{
+		$latte = $template->getLatte();
+		foreach ($this->parameters as $name => $value) {
+			$template->add($name, $value);
+		}
+		foreach ($this->helpers as $helperName => $callback) {
+			$latte->addFilter($helperName, $callback);
+		}
+		foreach ($this->macros as $macro) {
+			Callback::invokeArgs([$macro, 'install'], [$latte->getCompiler()]);
+		}
+
+		return $template;
 	}
 
 	/**

@@ -14,6 +14,8 @@ if (@!include __DIR__ . '/../../vendor/autoload.php') {
 }
 
 require_once __DIR__ . '/../data/PresenterMock.php';
+require_once __DIR__ . '/../data/Helper.php';
+require_once __DIR__ . '/../data/Macro.php';
 
 // configure environment
 Tester\Environment::setup();

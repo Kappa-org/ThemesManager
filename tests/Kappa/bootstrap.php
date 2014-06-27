@@ -13,6 +13,8 @@ if (@!include __DIR__ . '/../../vendor/autoload.php') {
 	exit(1);
 }
 
+require_once __DIR__ . '/../data/PresenterMock.php';
+
 // configure environment
 Tester\Environment::setup();
 class_alias('Tester\Assert', 'Assert');

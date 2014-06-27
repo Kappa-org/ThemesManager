@@ -44,6 +44,9 @@ class ThemesManagerExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('formatter'))
 			->setClass('Kappa\ThemesManager\Mapping\Formatter');
 
+		$builder->addDefinition($this->prefix('themeFactory'))
+			->setClass('Kappa\ThemesManager\ThemeFactory');
+
 		$this->processThemesManager($builder, $config);
 	}
 

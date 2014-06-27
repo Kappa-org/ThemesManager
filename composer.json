@@ -16,7 +16,7 @@
 		"issues": "https://github.com/Kappa-org/ThemesManager/issues"
 	},
 	"require": {
-
+		"nette/di": "~2.2"
 	},
 	"require-dev": {
 		"kappa/tester": "~1.1"

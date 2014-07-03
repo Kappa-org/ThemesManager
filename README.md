@@ -57,7 +57,7 @@ In masks you can use next placeholders:
 
 In your presenter you can get template factory and file formats
 
-Usages [kdyby/autowired](https://github.com/Kdyby/Autowired/)
+Usages [kdyby/autowired](https://github.com/Kdyby/Autowired/) **Recommended**
 ```php
 class BasePresenter extends Presenter
 {
@@ -77,24 +77,19 @@ class BasePresenter extends Presenter
 {
 	/** @var \Kappa\ThemesManager\ThemesManager @inject */
 	public $themesManager;
-
-	/** @var \Kappa\ThemesManager\Theme */
-	protected $theme;
-
-	protected function setUp()
-	{
-		parent::setUp();
-		$this->theme = $this->themesManager->getTheme('admin');
-	}
 ```
 
 Update template:
 
 ```php
-protected function createTemplate()
+protected function getTemplateFactory()
 {
-	$template = parent::createTemplate();
-	$template = $this->theme->configureTemplate($template);
+	$templateFactory = parent::createTemplate();
+	// For kdyby/autowired
+	$templateFactory->setTheme($this->theme);
+	// Else
+	$theme = $this->themesManager->getTheme('admin');
+	$templateFactory->setTheme($theme);
 
     return $template;
 }

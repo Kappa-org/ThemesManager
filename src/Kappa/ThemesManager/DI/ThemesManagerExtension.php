@@ -47,6 +47,9 @@ class ThemesManagerExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('themeFactory'))
 			->setClass('Kappa\ThemesManager\ThemeFactory');
 
+		$builder->getDefinition('nette.templateFactory')
+			->setClass('Kappa\ThemesManager\Template\TemplateFactory');
+
 		$this->processThemesManager($builder, $config);
 	}
 

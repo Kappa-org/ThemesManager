@@ -57,7 +57,7 @@ In masks you can use next placeholders:
 
 In your presenter you can get template factory and file formats
 
-Usages [kdyby/autowired](https://github.com/Kdyby/Autowired/) **Recommended**
+Usages [kdyby/autowired](https://github.com/Kdyby/Autowired/), **it is recommended**
 ```php
 class BasePresenter extends Presenter
 {

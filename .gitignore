@@ -1,6 +1,4 @@
 vendor/*
 composer.lock
-coverage.dat
 *.actual
 *.expected
-tests/temp/*

@@ -29,11 +29,11 @@
     "nette/nette": "@dev"
   },
   "autoload": {
-    "psr-0": {
-      "Kappa": "src/"
+    "psr-4": {
+      "Kappa\\ThemesManager\\": "src/"
     },
     "classmap": [
-      "src/Kappa/ThemesManager/exceptions.php"
+      "src/exceptions.php"
     ]
   }
 }

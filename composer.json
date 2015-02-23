@@ -1,34 +1,39 @@
 {
-	"name": "kappa/themes-manager",
-	"description": "Package for easier work with themes",
-	"keywords": ["Kappa", "packages", "themes", "manager"],
-	"homepage": "https://github.com/Kappa-org/ThemesManager",
-	"license": "BSD-3-Clause",
-	"type": "library",
-	"authors": [
-		{
-			"name": "Ondřej Záruba",
-			"homepage": "http://zaruba-ondrej.cz"
-		}
-	],
-	"support": {
-		"email": "zarubaondra@gmail.com",
-		"issues": "https://github.com/Kappa-org/ThemesManager/issues"
-	},
-	"require": {
-		"nette/di": "~2.2"
-	},
-	"require-dev": {
-		"kappa/tester": "~1.1",
-		"janmarek/mockista": "~1.0",
-		"nette/nette": "@dev"
-	},
-	"autoload": {
-		"psr-0": {
-			"Kappa": "src/"
-		},
-		"classmap": [
-			"src/Kappa/ThemesManager/exceptions.php"
-		]
-	}
+  "name": "kappa/themes-manager",
+  "description": "Package for easier work with themes",
+  "keywords": [
+    "Kappa",
+    "packages",
+    "themes",
+    "manager"
+  ],
+  "homepage": "https://github.com/Kappa-org/ThemesManager",
+  "license": "BSD-3-Clause",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Ondřej Záruba",
+      "homepage": "http://zaruba-ondrej.cz"
+    }
+  ],
+  "support": {
+    "email": "zarubaondra@gmail.com",
+    "issues": "https://github.com/Kappa-org/ThemesManager/issues"
+  },
+  "require": {
+    "nette/di": "~2.2"
+  },
+  "require-dev": {
+    "kappa/tester": "~1.1",
+    "janmarek/mockista": "~1.0",
+    "nette/nette": "@dev"
+  },
+  "autoload": {
+    "psr-0": {
+      "Kappa": "src/"
+    },
+    "classmap": [
+      "src/Kappa/ThemesManager/exceptions.php"
+    ]
+  }
 }

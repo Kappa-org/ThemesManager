@@ -9,12 +9,3 @@
  */
 
 namespace Kappa\ThemesManager;
-
-/**
- * Class InvalidArgumentException
- * @package Kappa\ThemesManager
- */
-class InvalidArgumentException extends \LogicException
-{
-
-}

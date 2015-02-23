@@ -9,3 +9,14 @@
  */
 
 namespace Kappa\ThemesManager;
+
+/**
+ * Class InvalidArgumentException
+ *
+ * @package Kappa\ThemesManager
+ * @author Ondřej Záruba <http://zaruba-ondrej.cz>
+ */
+class InvalidArgumentException extends \LogicException
+{
+
+}

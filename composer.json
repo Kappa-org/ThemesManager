@@ -25,7 +25,8 @@
   },
   "require-dev": {
     "nette/nette": "@dev",
-    "nette/tester": "~1.0"
+    "nette/tester": "~1.0",
+    "janmarek/mockista": "~1.1"
   },
   "autoload": {
     "psr-4": {

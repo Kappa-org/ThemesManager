@@ -36,16 +36,20 @@ class PathMasksProvider
 	}
 
 	/**
+	 * @param string $themeName
 	 * @param string $type
-	 * @return array
+	 * @return mixed
 	 */
-	public function getMasks($type)
+	public function getMasks($themeName, $type)
 	{
 		$types = [self::LAYOUTS, self::TEMPLATES];
+		if (!array_key_exists($themeName, $this->masks)) {
+			throw new InvalidArgumentException("Missing masks for theme '{$themeName}'");
+		}
 		if (!in_array($type, $types)) {
 			throw new InvalidArgumentException('Unsupported path type. You can use only LAYOUT or TEMPLATES type');
 		}
 
-		return $this->masks[$type];
+		return $this->masks[$themeName][$type];
 	}
 }

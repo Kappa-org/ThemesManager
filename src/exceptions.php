@@ -20,3 +20,14 @@ class InvalidArgumentException extends \LogicException
 {
 
 }
+
+/**
+ * Class InvalidStateException
+ *
+ * @package Kappa\ThemesManager
+ * @author Ondřej Záruba <http://zaruba-ondrej.cz>
+ */
+class InvalidStateException extends \LogicException
+{
+
+}

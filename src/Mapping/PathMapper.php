@@ -11,6 +11,7 @@
 namespace Kappa\ThemesManager\Mapping;
 
 use Kappa\ThemesManager\InvalidArgumentException;
+use Kappa\ThemesManager\InvalidStateException;
 use Kappa\ThemesManager\Theme;
 use Nette\Application\Application;
 use Nette\Application\UI\Presenter;
@@ -121,7 +122,12 @@ class PathMapper
 	 */
 	private function getPresenter()
 	{
-		return $this->application->getPresenter();
+		$presenter = $this->application->getPresenter();
+		if (!$presenter) {
+			throw new InvalidStateException("Missing presenter");
+		}
+		
+		return $presenter;
 	}
 
 	/**

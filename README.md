@@ -83,7 +83,7 @@ class BasePresenter extends Presenter
 Update template:
 
 ```php
-protected function getTemplateFactory()
+public function getTemplateFactory()
 {
 	$templateFactory = parent::createTemplate();
 	// For kdyby/autowired

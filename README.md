@@ -5,14 +5,15 @@ Package for easier work with themes
 ## Requirements:
 
 * PHP 5.4 or higher
-* Nette\DI 2.2 or higher
+* [nette\di](https://github.com/nette/di) 2.2 or higher
+* [nette\application](https://github.com/nette/application) 2.2 or higher
 
 ## Installation:
 
 The best way to install Kappa\ThemesManager is using Composer
 
 ```sh
-$ composer require kappa/application:@dev
+$ composer require kappa/themes-manager:@dev
 ```
 
 ## Usages
@@ -29,18 +30,18 @@ Now you can configure templates for your application in config file
 ```yaml
 themes:
 	themeName:
+		themeDir: %wwwDir%/../../ # this is only required item
+		params:
+			# params
 		helpers:
 			# helpers in format helperName: @service::method
 		macros:
 			# macros
 		pathMasks:
-			presenters:
+			templates:
 				# path masks for formatTemplateFiles
 			layouts:
 				# path masks for formatLayoutTemplateFiles
-		params:
-			themeDir: %wwwDir%/../../ # this is only required item
-			# and any next params
 ```
 
 All settings will be used only in own section.
@@ -65,7 +66,7 @@ class BasePresenter extends Presenter
 
 	/**
 	 * @var \Kappa\ThemesManager\Theme
-	 * @autowire(admin, factory=\Kappa\ThemesManager\ThemeFactory)
+	 * @autowire(admin, factory=\Kappa\ThemesManager\ThemeRegistry)
 	 */
 	public $theme;
 
@@ -102,14 +103,14 @@ Next you can use custom path masks. Example:
 ```php
 public function formatLayoutTemplateFiles()
 {
-    $list = $this->theme->getFormatLayoutTemplateFiles();
+    $list = $this->theme->getPathMapper->getFormatLayoutTemplateFiles();
 
     return $list;
 }
 
 public function formatTemplateFiles()
 {
-    $list = $this->theme->getFormatTemplateFiles();
+    $list = $this->theme->getPathMapper()->getFormatTemplateFiles();
 
     return $list;
 }

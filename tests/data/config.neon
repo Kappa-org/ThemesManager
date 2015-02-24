@@ -1,22 +1,17 @@
-services:
-	helper: Helper
-
-
 extensions:
 	themes: Kappa\ThemesManager\DI\ThemesManagerExtension
-
 
 themes:
 	*:
 		params:
 			message: Hello
 		helpers:
-			helper: @helper::process
+			helper: KappaTests\ThemesManager\Tests\Mocks\TestHelper0::process
 	section:
+		themeDir: %appDir%
 		params:
-			themeDir: %appDir%
 		macros:
-			- Macro
+			- KappaTests\ThemesManager\Tests\Mocks\TestMacro
 		pathsMasks:
 			presenter:
 				- test

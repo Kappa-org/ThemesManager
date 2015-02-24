@@ -33,14 +33,13 @@ class PathMapperFactoryTest extends TestCase
 	protected function setUp()
 	{
 		$applicationMock = \Mockery::mock('Nette\Application\Application');
-		$pathMasksProvider = new PathMasksProvider([]);
-		$this->pathMapperFactory = new PathMapperFactory($applicationMock, $pathMasksProvider);
+		$this->pathMapperFactory = new PathMapperFactory($applicationMock);
 	}
 
 	public function testCreate()
 	{
 		$themeMock = \Mockery::mock('Kappa\ThemesManager\Theme');
-		Assert::type('Kappa\ThemesManager\Mapping\PathMapper', $this->pathMapperFactory->create($themeMock));
+		Assert::type('Kappa\ThemesManager\Mapping\PathMapper', $this->pathMapperFactory->create($themeMock, new PathMasksProvider([])));
 	}
 }
 

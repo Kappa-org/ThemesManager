@@ -12,6 +12,7 @@ namespace Kappa\ThemesManager;
 
 use Kappa\ThemesManager\Mapping\PathMapper;
 use Kappa\ThemesManager\Mapping\PathMapperFactory;
+use Kappa\ThemesManager\Mapping\PathMasksProvider;
 use Kappa\ThemesManager\Template\TemplateConfigurator;
 
 /**
@@ -34,13 +35,17 @@ class Theme
 	/** @var PathMapperFactory */
 	private $pathMapperFactory;
 
+	/** @var PathMasksProvider */
+	private $masksProvider;
+
 	/**
 	 * @param string $name
 	 * @param string $themeDir
 	 * @param TemplateConfigurator $templateConfigurator
+	 * @param PathMasksProvider $masksProvider
 	 * @param PathMapperFactory $pathMapperFactory
 	 */
-	public function __construct($name, $themeDir, TemplateConfigurator $templateConfigurator, PathMapperFactory $pathMapperFactory)
+	public function __construct($name, $themeDir, TemplateConfigurator $templateConfigurator, PathMasksProvider $masksProvider, PathMapperFactory $pathMapperFactory)
 	{
 		if (!file_exists($themeDir) || !is_readable($themeDir)) {
 			throw new InvalidArgumentException("Theme dir '{$themeDir}' has not been found or readable");
@@ -50,6 +55,7 @@ class Theme
 		$this->templateConfigurator = $templateConfigurator;
 		$this->pathMapperFactory = $pathMapperFactory;
 		$this->templateConfigurator->setParameter('themeDir', $this->themeDir);
+		$this->masksProvider = $masksProvider;
 	}
 
 	/**
@@ -81,6 +87,6 @@ class Theme
 	 */
 	public function getPathMapper()
 	{
-		return $this->pathMapperFactory->create($this);
+		return $this->pathMapperFactory->create($this, $this->masksProvider);
 	}
 }

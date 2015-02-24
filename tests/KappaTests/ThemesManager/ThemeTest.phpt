@@ -12,6 +12,7 @@
 
 namespace Kappa\ThemesManager\Tests;
 
+use Kappa\ThemesManager\Mapping\PathMasksProvider;
 use Kappa\ThemesManager\Theme;
 use Tester\TestCase;
 use Tester\Assert;
@@ -35,7 +36,7 @@ class ThemeTest extends TestCase
 		$configuratorMock->shouldReceive('setParameter')->andReturnSelf();
 		$pathMapperFactoryMock = \Mockery::mock('Kappa\ThemesManager\Mapping\PathMapperFactory');
 		$pathMapperFactoryMock->shouldReceive('create')->andReturn(\Mockery::mock('Kappa\ThemesManager\Mapping\PathMapper'));
-		$this->theme = new Theme('foo', __DIR__, $configuratorMock, $pathMapperFactoryMock);
+		$this->theme = new Theme('foo', __DIR__, $configuratorMock, new PathMasksProvider([]), $pathMapperFactoryMock);
 	}
 
 	public function testGetName()

@@ -24,25 +24,21 @@ class PathMapperFactory
 	/** @var Application */
 	private $application;
 
-	/** @var PathMasksProvider */
-	private $pathMasksProvider;
-
 	/**
 	 * @param Application $application
-	 * @param PathMasksProvider $pathMasksProvider
 	 */
-	public function __construct(Application $application, PathMasksProvider $pathMasksProvider)
+	public function __construct(Application $application)
 	{
 		$this->application = $application;
-		$this->pathMasksProvider = $pathMasksProvider;
 	}
 
 	/**
 	 * @param Theme $theme
+	 * @param PathMasksProvider $pathMasksProvider
 	 * @return PathMapper
 	 */
-	public function create(Theme $theme)
+	public function create(Theme $theme, PathMasksProvider $pathMasksProvider)
 	{
-		return new PathMapper($this->application, $this->pathMasksProvider, $theme);
+		return new PathMapper($this->application, $pathMasksProvider, $theme);
 	}
 }

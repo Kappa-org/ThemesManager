@@ -1,17 +1,20 @@
+services:
+	application: KappaTests\ThemesManager\Tests\Mocks\ApplicationMock
+
 extensions:
 	themes: Kappa\ThemesManager\DI\ThemesManagerExtension
 
 themes:
 	*:
-		params:
+		parameters:
 			message: Hello
 		helpers:
 			helper: KappaTests\ThemesManager\Tests\Mocks\TestHelper0::process
-	section:
+	foo:
 		themeDir: %appDir%
-		params:
+		parameters:
 		macros:
 			- KappaTests\ThemesManager\Tests\Mocks\TestMacro
-		pathsMasks:
-			presenter:
+		pathMasks:
+			templates:
 				- test

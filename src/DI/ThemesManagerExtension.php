@@ -46,6 +46,9 @@ class ThemesManagerExtension extends CompilerExtension
 		$registry = $builder->addDefinition($this->prefix('themeRegistry'))
 			->setClass('Kappa\ThemesManager\ThemeRegistry');
 
+		$builder->getDefinition('nette.templateFactory')
+			->setClass('Kappa\ThemesManager\Template\TemplateFactory');
+
 		$defaultConfig = null;
 		if (array_key_exists('*', $this->config)) {
 			$defaultConfig = $config['*'];

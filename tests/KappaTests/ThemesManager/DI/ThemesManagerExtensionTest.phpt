@@ -50,6 +50,11 @@ class ThemesManagerExtensionTest extends TestCase
 		Assert::equal(['helper' => [new TestHelper(), 'process']], $theme->getTemplateConfigurator()->getHelpers());
 	}
 
+	public function testCustomTemplateFactory()
+	{
+		Assert::type('Kappa\ThemesManager\Template\TemplateFactory', $this->getContainer()->getService('nette.templateFactory'));
+	}
+
 	/**
 	 * @return \Nette\DI\Container
 	 */

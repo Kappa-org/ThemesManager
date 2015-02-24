@@ -44,4 +44,13 @@ class ThemeRegistry
 
 		return $this->themes[$name];
 	}
+
+	/**
+	 * @param string $name
+	 * @return Theme|null
+	 */
+	public function create($name)
+	{
+		return $this->getTheme($name);
+	}
 }

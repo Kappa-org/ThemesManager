@@ -41,6 +41,14 @@ class ThemeRegistryTest extends TestCase
 		Assert::type('Kappa\ThemesManager\ThemeRegistry', $this->registry->addTheme($theme));
 		Assert::equal($theme, $this->registry->getTheme('foo'));
 	}
+
+	public function testSetCreate()
+	{
+		$theme = \Mockery::mock('Kappa\ThemesManager\Theme');
+		$theme->shouldReceive('getName')->andReturn('foo');
+		Assert::type('Kappa\ThemesManager\ThemeRegistry', $this->registry->addTheme($theme));
+		Assert::equal($theme, $this->registry->create('foo'));
+	}
 }
 
 \run(new ThemeRegistryTest());

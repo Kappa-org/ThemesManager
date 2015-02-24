@@ -66,7 +66,7 @@ class PathMapper
 	 */
 	private function getFormattedPaths($type)
 	{
-		$masks = $this->pathMasksProvider->getMasks($type);
+		$masks = $this->pathMasksProvider->getMasks($this->theme->getName(), $type);
 
 		return $this->format($masks);
 	}

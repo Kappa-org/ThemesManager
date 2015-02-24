@@ -29,13 +29,18 @@ class PathMasksProviderTest extends TestCase
 	public function testGetMasks()
 	{
 		$provider = new PathMasksProvider([
-			PathMasksProvider::LAYOUTS => ['foo'],
-			PathMasksProvider::TEMPLATES => ['bar'],
+			'foo' => [
+				PathMasksProvider::LAYOUTS => ['foo'],
+				PathMasksProvider::TEMPLATES => ['bar'],
+			]
 		]);
-		Assert::equal(['foo'], $provider->getMasks(PathMasksProvider::LAYOUTS));
-		Assert::equal(['bar'], $provider->getMasks(PathMasksProvider::TEMPLATES));
+		Assert::equal(['foo'], $provider->getMasks('foo', PathMasksProvider::LAYOUTS));
+		Assert::equal(['bar'], $provider->getMasks('foo', PathMasksProvider::TEMPLATES));
 		Assert::exception(function () use ($provider) {
-			$provider->getMasks('foo');
+			$provider->getMasks('foo', 'foo');
+		}, 'Kappa\ThemesManager\InvalidArgumentException');
+		Assert::exception(function () use ($provider) {
+			$provider->getMasks('bar', 'foo');
 		}, 'Kappa\ThemesManager\InvalidArgumentException');
 	}
 }

@@ -47,7 +47,7 @@ class ThemeRegistry
 
 	/**
 	 * @param string $name
-	 * @return Theme|null
+	 * @return Theme
 	 */
 	public function create($name)
 	{

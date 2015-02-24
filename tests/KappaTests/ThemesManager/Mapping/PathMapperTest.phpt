@@ -39,18 +39,16 @@ class PathMapperTest extends TestCase
 		$applicationMock = \Mockery::mock('Nette\Application\Application');
 		$applicationMock->shouldReceive('getPresenter')->andReturn($presenterMock);
 		$pathMasksProvider = new PathMasksProvider([
-			'fooTheme' => [
-				PathMasksProvider::TEMPLATES => [
-					':themeName:',
-					':themeDir:',
-					':view:',
-					':action:',
-					':presenter:',
-					':modules:',
-					':module_10:',
-					':module_1:',
-					'foo/:themeName:/:themeDir:/:view:/:action:/:presenter:/:modules:/:module_10:/:module_1:/bar'
-				]
+			PathMasksProvider::TEMPLATES => [
+				':themeName:',
+				':themeDir:',
+				':view:',
+				':action:',
+				':presenter:',
+				':modules:',
+				':module_10:',
+				':module_1:',
+				'foo/:themeName:/:themeDir:/:view:/:action:/:presenter:/:modules:/:module_10:/:module_1:/bar'
 			]
 		]);
 		$themeMock = \Mockery::mock('Kappa\ThemesManager\Theme');

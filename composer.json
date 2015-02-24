@@ -21,7 +21,8 @@
     "issues": "https://github.com/Kappa-org/ThemesManager/issues"
   },
   "require": {
-    "nette/di": "~2.2"
+    "nette/di": "~2.2",
+    "nette/application": "~2.2@dev"
   },
   "require-dev": {
     "nette/nette": "@dev",

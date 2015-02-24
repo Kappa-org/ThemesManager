@@ -1,4 +1,5 @@
 services:
+	- KappaTests\ThemesManager\Tests\Mocks\TestHelper
 	application: KappaTests\ThemesManager\Tests\Mocks\ApplicationMock
 
 extensions:
@@ -9,7 +10,7 @@ themes:
 		parameters:
 			message: Hello
 		helpers:
-			helper: KappaTests\ThemesManager\Tests\Mocks\TestHelper0::process
+			helper: @KappaTests\ThemesManager\Tests\Mocks\TestHelper::process
 	foo:
 		themeDir: %appDir%
 		parameters:

@@ -12,7 +12,6 @@ namespace Kappa\ThemesManager\DI;
 
 use Kappa\ThemesManager\InvalidArgumentException;
 use Kappa\ThemesManager\Mapping\PathMasksProvider;
-use Nette\Bridges\Framework\NetteExtension;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Config\Helpers;
 use Nette\DI\Statement;

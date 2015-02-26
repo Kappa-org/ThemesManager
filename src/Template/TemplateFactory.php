@@ -39,7 +39,7 @@ class TemplateFactory extends \Nette\Bridges\ApplicationLatte\TemplateFactory
 	 * @param UI\Control $control
 	 * @return \Nette\Bridges\ApplicationLatte\Template
 	 */
-	public function createTemplate(UI\Control $control)
+	public function createTemplate(UI\Control $control = null)
 	{
 		$template = parent::createTemplate($control);
 		if ($this->theme) {

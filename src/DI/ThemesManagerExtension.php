@@ -12,6 +12,7 @@ namespace Kappa\ThemesManager\DI;
 
 use Kappa\ThemesManager\InvalidArgumentException;
 use Kappa\ThemesManager\Mapping\PathMasksProvider;
+use Nette\Bridges\Framework\NetteExtension;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Config\Helpers;
 use Nette\DI\Statement;
@@ -46,8 +47,12 @@ class ThemesManagerExtension extends CompilerExtension
 		$registry = $builder->addDefinition($this->prefix('themeRegistry'))
 			->setClass('Kappa\ThemesManager\ThemeRegistry');
 
-		$builder->getDefinition('nette.templateFactory')
-			->setClass('Kappa\ThemesManager\Template\TemplateFactory');
+		if ($builder->hasDefinition('latte.templateFactory')) {
+			$templateFactory = $builder->getDefinition('latte.templateFactory');
+		} else {
+			$templateFactory = $builder->getDefinition('nette.templateFactory');
+		}
+		$templateFactory->setFactory('Kappa\ThemesManager\Template\TemplateFactory');
 
 		$defaultConfig = null;
 		if (array_key_exists('*', $this->config)) {

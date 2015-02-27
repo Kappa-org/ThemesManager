@@ -112,6 +112,7 @@ class TemplateConfigurator
 	public function configureTemplate(Template $template)
 	{
 		foreach ($this->getParameters() as $name => $value) {
+			$value = str_replace(":themeDir:", $this->getParameter('themeDir'), $value);
 			$template->add($name, $value);
 		}
 		foreach ($this->getHelpers() as $name => $helper) {

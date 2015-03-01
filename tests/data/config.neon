@@ -16,7 +16,7 @@ themes:
 				helper: @KappaTests\ThemesManager\Tests\Mocks\TestHelper::process
 		foo:
 			themeDir: %appDir%/../../../data
-			assetsDir: %appDir%/../../../data/assets
+			assetsDir: :themeDir:/assets
 			parameters:
 			macros:
 				- KappaTests\ThemesManager\Tests\Mocks\TestMacro

@@ -14,8 +14,10 @@ if ((!$loader = @include __DIR__ . '/../../vendor/autoload.php') && (!$loader = 
 }
 /** @var Composer\Autoload\ClassLoader $loader */
 $loader->addPsr4("KappaTests\\", __DIR__);
+
 // configure environment
 Tester\Environment::setup();
+
 define('TEMP_DIR', __DIR__ . '/../temp/' . (isset($_SERVER['argv']) ? md5(serialize($_SERVER['argv'])) : getmypid()));
 Tester\Helpers::purge(TEMP_DIR);
 

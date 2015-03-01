@@ -10,6 +10,7 @@
 
 namespace Kappa\ThemesManager\Resolvers;
 
+use Kappa\ThemesManager\DirectoryNotFoundException;
 use Kappa\ThemesManager\Theme;
 use Kappa\ThemesManager\ThemeRegistry;
 use Nette\Utils\FileSystem;
@@ -27,21 +28,24 @@ class AssetsResolver
 	private $themeRegistry;
 
 	/** @var string */
-	private $wwwDir;
+	private $documentRoot;
 
 	/** @var string */
-	private $targetDir;
+	private $targetDirectory;
 
 	/**
 	 * @param ThemeRegistry $themeRegistry
-	 * @param string $wwwDir
-	 * @param string $targetDir
+	 * @param string $documentRoot
+	 * @param string $targetDirectory
 	 */
-	public function __construct(ThemeRegistry $themeRegistry, $wwwDir, $targetDir)
+	public function __construct(ThemeRegistry $themeRegistry, $documentRoot, $targetDirectory)
 	{
+		if (!is_dir($documentRoot)) {
+			throw new DirectoryNotFoundException("Directory '{$documentRoot}' (document root) has not been found");
+		}
 		$this->themeRegistry = $themeRegistry;
-		$this->wwwDir = $wwwDir;
-		$this->targetDir = $targetDir;
+		$this->documentRoot = $documentRoot;
+		$this->targetDirectory = $targetDirectory;
 	}
 
 	public function resolve()
@@ -57,24 +61,61 @@ class AssetsResolver
 	 */
 	private function resolveTheme(Theme $theme)
 	{
-		$assetsDir = $theme->getAssetsDir();
+		$checksum = $this->getDirectoryChecksum($theme->getAssetsDir());
+		$path = "{$this->getTargetDirectory()}/{$theme->getName()}_{$checksum}";
+		if (!file_exists($path)) {
+			$this->dropOldAssets($theme->getName());
+			FileSystem::copy($theme->getAssetsDir(), $path);
+		}
+		$relativePath = $this->makePathRelativeToRoot($path);
+		$theme->getTemplateConfigurator()->setParameter('assetsDir', $relativePath);
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getTargetDirectory()
+	{
+		$path = $this->documentRoot . DIRECTORY_SEPARATOR . $this->targetDirectory;
+		if (!file_exists($path)) {
+			FileSystem::createDir($path);
+		}
+
+		return $path;
+	}
+
+	/**
+	 * @param string $directory
+	 * @return string
+	 */
+	private function getDirectoryChecksum($directory)
+	{
 		$checksum = '';
 		/** @var \SplFileInfo $file */
-		foreach (Finder::findFiles('*')->from($assetsDir) as $path => $file) {
-			$checksum = md5($file->getPathname(). $file->getMTime() . $checksum);
+		foreach (Finder::findFiles('*')->from($directory) as $file) {
+			$checksum = md5($file->getPathname() . $file->getMTime() . $checksum);
 		}
-		$dirName = $theme->getName() . '_' . $checksum;
-		$targetDirectory = $this->wwwDir . DIRECTORY_SEPARATOR . $this->targetDir;
-		if (!file_exists($targetDirectory)) {
-			FileSystem::createDir($targetDirectory);
+
+		return $checksum;
+	}
+
+	/**
+	 * @param $themeName
+	 */
+	private function dropOldAssets($themeName)
+	{
+		/** @var \SplFileInfo $file */
+		foreach (Finder::findDirectories($themeName . '_')->in($this->getTargetDirectory()) as $file) {
+			FileSystem::delete($file->getPathname());
 		}
-		$directory = $targetDirectory . DIRECTORY_SEPARATOR . $dirName;
-		if (!file_exists($directory)) {
-			foreach (Finder::findDirectories($theme->getName() . '_*')->in($targetDirectory) as $old) {
-				FileSystem::delete($old);
-			}
-			FileSystem::copy($assetsDir, $directory);
-		}
-		$theme->getTemplateConfigurator()->setParameter('assetsDir', $directory);
+	}
+
+	/**
+	 * @param string $path
+	 * @return string
+	 */
+	private function makePathRelativeToRoot($path)
+	{
+		return str_replace($this->documentRoot, '', $path);
 	}
 }

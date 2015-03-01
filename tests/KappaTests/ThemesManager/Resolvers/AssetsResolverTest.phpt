@@ -13,8 +13,11 @@
 namespace KappaTests\ThemesManager\Resolvers;
 
 use Kappa\ThemesManager\Resolvers\AssetsResolver;
+use Kappa\ThemesManager\Template\TemplateConfigurator;
+use Mockery\MockInterface;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\visitor\vfsStreamStructureVisitor;
 use Tester\TestCase;
 use Tester\Assert;
 
@@ -31,42 +34,62 @@ class AssetsResolverTest extends TestCase
 	/** @var AssetsResolver */
 	private $assetsResolver;
 
+	/** @var MockInterface */
+	private $theme;
+
 	/** @var vfsStreamDirectory */
-	private $wwwDir;
+	private $directory;
 
 	protected function setUp()
 	{
-		$themeAssetsDir = DATA_DIR . '/assets';
-		$this->wwwDir = vfsStream::setup('www');
+		$this->directory = vfsStream::setup('root', null, $this->getStructure());
 
-		$templateConfigurator = \Mockery::mock('Kappa\ThemesManager\Template\TemplateConfigurator');
-		$templateConfigurator->shouldReceive('setParameter')
-			->with('assetsDir', \Mockery::any())
-			->once()
-			->andReturnSelf();
-		$theme = \Mockery::mock('Kappa\ThemesManager\Theme');
-		$theme->shouldReceive('getAssetsDir')->once()->withNoArgs()->andReturn($themeAssetsDir);
-		$theme->shouldReceive('getName')->between(1, 2)->withNoArgs()->andReturn('foo');
-		$theme->shouldReceive('getTemplateConfigurator')
-			->once()
+		$this->theme = \Mockery::mock('Kappa\ThemesManager\Theme');
+		$this->theme->shouldReceive('getAssetsDir')
 			->withNoArgs()
-			->andReturn($templateConfigurator);
+			->andReturn(vfsStream::url('root/themes/foo/assets'));
+		$this->theme->shouldReceive('getName')
+			->withNoArgs()
+			->andReturn('foo');
+		$this->theme->shouldReceive('getTemplateConfigurator')
+			->withNoArgs()
+			->andReturn(new TemplateConfigurator(['assetsDir' => vfsStream::url('root/themes/foo/assets')]));
+
 		$themeRegistry = \Mockery::mock('Kappa\ThemesManager\ThemeRegistry');
-		$themeRegistry->shouldReceive('getThemes')->once()->withNoArgs()->andReturn([$theme]);
-		$this->assetsResolver = new AssetsResolver($themeRegistry, vfsStream::url('www'), 'assets');
+		$themeRegistry->shouldReceive('getThemes')->once()->withNoArgs()->andReturn([$this->theme]);
+
+		$this->assetsResolver = new AssetsResolver($themeRegistry, vfsStream::url('root/www'), 'assets');
 	}
 
 	public function testResolve()
 	{
-		Assert::false(file_exists(vfsStream::url('www') . '/assets'));
+		$structure = vfsStream::inspect(new vfsStreamStructureVisitor())->getStructure();
+		Assert::notEqual($structure['root']['themes']['foo'], $this->getStructure()['www']);
+		Assert::same(vfsStream::url('root/themes/foo/assets'), $this->theme->getTemplateConfigurator()->getParameter('assetsDir'));
 		$this->assetsResolver->resolve();
-		Assert::true(file_exists(vfsStream::url('www') . '/assets'));
-		$assets = $this->wwwDir->getChild('assets')->getChildren();
-		Assert::match('~foo_[a-z0-9]+~', $assets[0]->getName());
-		Assert::true($assets[0]->hasChild('js'));
-		$jsDir = $assets[0]->getChild('js');
-		$jsFile = $jsDir->getChild('file.js');
-		Assert::match('~^console.log\("Hello"\);\s*$~', $jsFile->getContent());
+		$structure = vfsStream::inspect(new vfsStreamStructureVisitor())->getStructure();
+		$moduleAssetsDirName = $this->directory->getChild('www')->getChildren()[0]->getChildren()[0]->getName();
+		Assert::equal($structure['root']['themes']['foo']['assets'], $structure['root']['www']['assets'][$moduleAssetsDirName]);
+		Assert::same('/assets/' . $moduleAssetsDirName, $this->theme->getTemplateConfigurator()->getParameter('assetsDir'));
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getStructure()
+	{
+		return [
+			'www' => [],
+			'themes' => [
+				'foo' => [
+					'assets' => [
+						'js' => [
+							'js.js' => 'console.log("Hello");'
+						]
+					]
+				]
+			]
+		];
 	}
 
 	protected function tearDown()

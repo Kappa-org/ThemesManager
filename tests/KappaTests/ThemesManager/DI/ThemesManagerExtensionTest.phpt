@@ -44,9 +44,9 @@ class ThemesManagerExtensionTest extends TestCase
 		$theme = $service->getTheme('foo');
 		Assert::type('Kappa\ThemesManager\Theme', $theme);
 		Assert::same('foo', $theme->getName());
-		Assert::same(__DIR__, $theme->getThemeDir());
+		Assert::same(DATA_DIR, $theme->getThemeDir());
 		Assert::equal(['test'], $theme->getPathMapper()->getFormatTemplateFiles());
-		Assert::equal(['message' => 'Hello', 'themeDir' => __DIR__, 'assetsDir' => null], $theme->getTemplateConfigurator()->getParameters());
+		Assert::count(3, $theme->getTemplateConfigurator()->getParameters());
 		Assert::equal(['helper' => [new TestHelper(), 'process']], $theme->getTemplateConfigurator()->getHelpers());
 	}
 

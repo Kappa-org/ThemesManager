@@ -35,6 +35,7 @@ class ThemeTest extends TestCase
 		$configuratorMock = \Mockery::mock('Kappa\ThemesManager\Template\TemplateConfigurator');
 		$configuratorMock->shouldReceive('setParameter')->andReturnSelf();
 		$configuratorMock->shouldReceive('getParameter')->once()->with('themeDir')->andReturn(__DIR__);
+		$configuratorMock->shouldReceive('getParameter')->once()->with('assetsDir')->andReturn(__DIR__ . '/../');
 		$pathMapperFactoryMock = \Mockery::mock('Kappa\ThemesManager\Mapping\PathMapperFactory');
 		$pathMapperFactoryMock->shouldReceive('create')->andReturn(\Mockery::mock('Kappa\ThemesManager\Mapping\PathMapper'));
 		$this->theme = new Theme('foo', $configuratorMock, new PathMasksProvider([]), $pathMapperFactoryMock);
@@ -48,6 +49,11 @@ class ThemeTest extends TestCase
 	public function testGetThemeDir()
 	{
 		Assert::same(__DIR__, $this->theme->getThemeDir());
+	}
+
+	public function testGetAssetsDir()
+	{
+		Assert::same(__DIR__ . '/../', $this->theme->getAssetsDir());
 	}
 
 	public function testGetPathMapper()

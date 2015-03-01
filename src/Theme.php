@@ -69,6 +69,14 @@ class Theme
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getAssetsDir()
+	{
+		return $this->getTemplateConfigurator()->getParameter('assetsDir');
+	}
+
+	/**
 	 * @return TemplateConfigurator
 	 */
 	public function getTemplateConfigurator()

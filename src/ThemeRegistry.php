@@ -46,6 +46,14 @@ class ThemeRegistry
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getThemes()
+	{
+		return $this->themes;
+	}
+
+	/**
 	 * @param string $name
 	 * @return Theme
 	 */

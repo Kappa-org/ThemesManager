@@ -27,7 +27,8 @@ class ThemesManagerExtension extends CompilerExtension
 {
 	private $defaultConfig = [
 		'documentRoot' => '%wwwDir%',
-		'assetsDir' => 'assets'
+		'assetsDir' => 'assets',
+		'themes' => []
 	];
 
 	private $defaultThemeConfig = [
@@ -54,8 +55,6 @@ class ThemesManagerExtension extends CompilerExtension
 				$config['assetsDir']
 			]);
 
-		unset($config['assetsDir'], $config['documentRoot']);
-
 		$builder->addDefinition($this->prefix('pathMapperFactory'))
 			->setClass('Kappa\ThemesManager\Mapping\PathMapperFactory');
 
@@ -69,12 +68,13 @@ class ThemesManagerExtension extends CompilerExtension
 		}
 		$templateFactory->setFactory('Kappa\ThemesManager\Template\TemplateFactory');
 
+		$themesConfig = $config['themes'];
 		$defaultConfig = null;
-		if (array_key_exists('*', $this->config)) {
-			$defaultConfig = $config['*'];
-			unset($config['*']);
+		if (array_key_exists('*', $themesConfig)) {
+			$defaultConfig = $themesConfig['*'];
+			unset($themesConfig['*']);
 		}
-		foreach ($config as $name => $configuration) {
+		foreach ($themesConfig as $name => $configuration) {
 			$configuration = Helpers::merge($configuration, $this->defaultThemeConfig);
 			if ($defaultConfig) {
 				$configuration = Helpers::merge($configuration, $defaultConfig);

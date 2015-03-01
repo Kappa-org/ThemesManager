@@ -8,17 +8,18 @@ extensions:
 themes:
 	documentRoot: %appDir%/../../../data/www
 	assetsDir: assets
-	*:
-		parameters:
-			message: Hello
-		helpers:
-			helper: @KappaTests\ThemesManager\Tests\Mocks\TestHelper::process
-	foo:
-		themeDir: %appDir%/../../../data
-		assetsDir: %appDir%/../../../data/assets
-		parameters:
-		macros:
-			- KappaTests\ThemesManager\Tests\Mocks\TestMacro
-		pathMasks:
-			templates:
-				- test
+	themes:
+		*:
+			parameters:
+				message: Hello
+			helpers:
+				helper: @KappaTests\ThemesManager\Tests\Mocks\TestHelper::process
+		foo:
+			themeDir: %appDir%/../../../data
+			assetsDir: %appDir%/../../../data/assets
+			parameters:
+			macros:
+				- KappaTests\ThemesManager\Tests\Mocks\TestMacro
+			pathMasks:
+				templates:
+					- test

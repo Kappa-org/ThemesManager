@@ -26,6 +26,7 @@ class ThemesManagerExtension extends CompilerExtension
 {
 	private $defaultThemeConfig = [
 		'themeDir' => null,
+		'assetsDir' => null,
 		'parameters' => [],
 		'helpers' => [],
 		'macros' => [],
@@ -71,7 +72,10 @@ class ThemesManagerExtension extends CompilerExtension
 				$configuration['helpers'][$helperName] = $callback;
 			}
 			$templateConfigurator = new Statement('Kappa\ThemesManager\Template\TemplateConfigurator', [
-				array_merge($configuration['parameters'], ['themeDir' => $configuration['themeDir']]),
+				array_merge($configuration['parameters'], [
+					'themeDir' => $configuration['themeDir'],
+					'assetsDir' => $configuration['assetsDir']
+				]),
 				$configuration['helpers'],
 				$configuration['macros']
 			]);

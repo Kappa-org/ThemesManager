@@ -46,7 +46,7 @@ class ThemesManagerExtensionTest extends TestCase
 		Assert::same('foo', $theme->getName());
 		Assert::same(__DIR__, $theme->getThemeDir());
 		Assert::equal(['test'], $theme->getPathMapper()->getFormatTemplateFiles());
-		Assert::equal(['message' => 'Hello', 'themeDir' => __DIR__], $theme->getTemplateConfigurator()->getParameters());
+		Assert::equal(['message' => 'Hello', 'themeDir' => __DIR__, 'assetsDir' => null], $theme->getTemplateConfigurator()->getParameters());
 		Assert::equal(['helper' => [new TestHelper(), 'process']], $theme->getTemplateConfigurator()->getHelpers());
 	}
 

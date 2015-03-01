@@ -6,13 +6,16 @@ extensions:
 	themes: Kappa\ThemesManager\DI\ThemesManagerExtension
 
 themes:
+	documentRoot: %appDir%/../../../data
+	assetsDir:
 	*:
 		parameters:
 			message: Hello
 		helpers:
 			helper: @KappaTests\ThemesManager\Tests\Mocks\TestHelper::process
 	foo:
-		themeDir: %appDir%
+		themeDir: %appDir%/../../../data
+		assetsDir: %appDir%/../../../data/assets
 		parameters:
 		macros:
 			- KappaTests\ThemesManager\Tests\Mocks\TestMacro

@@ -6,8 +6,8 @@ extensions:
 	themes: Kappa\ThemesManager\DI\ThemesManagerExtension
 
 themes:
-	documentRoot: %appDir%/../../../data
-	assetsDir:
+	documentRoot: %appDir%/../../../data/www
+	assetsDir: assets
 	*:
 		parameters:
 			message: Hello

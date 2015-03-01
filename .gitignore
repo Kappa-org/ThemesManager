@@ -2,4 +2,4 @@ vendor/*
 composer.lock
 *.actual
 *.expected
-tests/data/foo*
+tests/data/www/*

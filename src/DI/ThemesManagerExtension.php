@@ -15,6 +15,7 @@ use Kappa\ThemesManager\Mapping\PathMasksProvider;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Config\Helpers;
 use Nette\DI\Statement;
+use Nette\PhpGenerator\ClassType;
 
 /**
  * Class ThemesManagerExtension
@@ -24,6 +25,11 @@ use Nette\DI\Statement;
  */
 class ThemesManagerExtension extends CompilerExtension
 {
+	private $defaultConfig = [
+		'documentRoot' => '%wwwDir%',
+		'assetsDir' => 'assets'
+	];
+
 	private $defaultThemeConfig = [
 		'themeDir' => null,
 		'assetsDir' => null,
@@ -38,8 +44,17 @@ class ThemesManagerExtension extends CompilerExtension
 
 	public function loadConfiguration()
 	{
-		$config = $this->getConfig();
+		$config = $this->getConfig($this->defaultConfig);
 		$builder = $this->getContainerBuilder();
+
+		$builder->addDefinition($this->prefix('assetsResolver'))
+			->setClass('Kappa\ThemesManager\AssetsResolver', [
+				$this->prefix('@themeRegistry'),
+				$config['documentRoot'],
+				$config['assetsDir']
+			]);
+
+		unset($config['assetsDir'], $config['documentRoot']);
 
 		$builder->addDefinition($this->prefix('pathMapperFactory'))
 			->setClass('Kappa\ThemesManager\Mapping\PathMapperFactory');
@@ -73,7 +88,7 @@ class ThemesManagerExtension extends CompilerExtension
 			}
 			$templateConfigurator = new Statement('Kappa\ThemesManager\Template\TemplateConfigurator', [
 				array_merge($configuration['parameters'], [
-					'themeDir' => $configuration['themeDir'],
+					'themeDir' => realpath($configuration['themeDir']),
 					'assetsDir' => $configuration['assetsDir']
 				]),
 				$configuration['helpers'],
@@ -89,5 +104,14 @@ class ThemesManagerExtension extends CompilerExtension
 			]);
 			$registry->addSetup('addTheme', [$theme]);
 		}
+	}
+
+	public function afterCompile(ClassType $class)
+	{
+		$builder = $this->getContainerBuilder();
+
+		// metoda initialize
+		$initialize = $class->methods['initialize'];
+		$initialize->addBody('$this->getService(?)->resolve();', [$builder->getByType('Kappa\ThemesManager\AssetsResolver')]);
 	}
 }

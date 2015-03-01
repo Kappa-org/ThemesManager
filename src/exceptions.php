@@ -31,3 +31,14 @@ class InvalidStateException extends \LogicException
 {
 
 }
+
+/**
+ * Class DirectoryNotFound
+ *
+ * @package Kappa\ThemesManager
+ * @author Ondřej Záruba <http://zaruba-ondrej.cz>
+ */
+class DirectoryNotFoundException extends \LogicException
+{
+
+}

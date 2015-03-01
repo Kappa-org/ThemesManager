@@ -27,7 +27,8 @@
   "require-dev": {
     "nette/nette": "@dev",
     "nette/tester": "~1.0",
-    "mockery/mockery": "~0.9@dev"
+    "mockery/mockery": "~0.9@dev",
+    "mikey179/vfsStream": "~1.4@dev"
   },
   "autoload": {
     "psr-4": {

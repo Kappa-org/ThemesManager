@@ -26,9 +26,6 @@ class Theme
 	/** @var string */
 	private $name;
 
-	/** @var string */
-	private $themeDir;
-
 	/** @var TemplateConfigurator */
 	private $templateConfigurator;
 
@@ -40,21 +37,18 @@ class Theme
 
 	/**
 	 * @param string $name
-	 * @param string $themeDir
 	 * @param TemplateConfigurator $templateConfigurator
 	 * @param PathMasksProvider $masksProvider
 	 * @param PathMapperFactory $pathMapperFactory
 	 */
-	public function __construct($name, $themeDir, TemplateConfigurator $templateConfigurator, PathMasksProvider $masksProvider, PathMapperFactory $pathMapperFactory)
+	public function __construct($name, TemplateConfigurator $templateConfigurator, PathMasksProvider $masksProvider, PathMapperFactory $pathMapperFactory)
 	{
-		if (!file_exists($themeDir) || !is_readable($themeDir)) {
-			throw new InvalidArgumentException("Theme dir '{$themeDir}' has not been found or readable");
+		if (!$templateConfigurator->getParameter('themeDir')) {
+			throw new InvalidArgumentException("Theme dir '{$templateConfigurator->getParameter('themeDir')}' has not been found or readable");
 		}
 		$this->name = $name;
-		$this->themeDir = $themeDir;
 		$this->templateConfigurator = $templateConfigurator;
 		$this->pathMapperFactory = $pathMapperFactory;
-		$this->templateConfigurator->setParameter('themeDir', $this->themeDir);
 		$this->masksProvider = $masksProvider;
 	}
 
@@ -71,7 +65,7 @@ class Theme
 	 */
 	public function getThemeDir()
 	{
-		return $this->themeDir;
+		return $this->getTemplateConfigurator()->getParameter('themeDir');
 	}
 
 	/**

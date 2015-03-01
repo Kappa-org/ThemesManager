@@ -34,9 +34,10 @@ class ThemeTest extends TestCase
 	{
 		$configuratorMock = \Mockery::mock('alias:Kappa\ThemesManager\Template\TemplateConfigurator');
 		$configuratorMock->shouldReceive('setParameter')->andReturnSelf();
+		$configuratorMock->shouldReceive('getParameter')->once()->with('themeDir')->andReturn(__DIR__);
 		$pathMapperFactoryMock = \Mockery::mock('Kappa\ThemesManager\Mapping\PathMapperFactory');
 		$pathMapperFactoryMock->shouldReceive('create')->andReturn(\Mockery::mock('Kappa\ThemesManager\Mapping\PathMapper'));
-		$this->theme = new Theme('foo', __DIR__, $configuratorMock, new PathMasksProvider([]), $pathMapperFactoryMock);
+		$this->theme = new Theme('foo', $configuratorMock, new PathMasksProvider([]), $pathMapperFactoryMock);
 	}
 
 	public function testGetName()

@@ -71,7 +71,7 @@ class ThemesManagerExtension extends CompilerExtension
 				$configuration['helpers'][$helperName] = $callback;
 			}
 			$templateConfigurator = new Statement('Kappa\ThemesManager\Template\TemplateConfigurator', [
-				$configuration['parameters'],
+				array_merge($configuration['parameters'], ['themeDir' => $configuration['themeDir']]),
 				$configuration['helpers'],
 				$configuration['macros']
 			]);
@@ -80,7 +80,6 @@ class ThemesManagerExtension extends CompilerExtension
 			]);
 			$theme = new Statement('Kappa\ThemesManager\Theme', [
 				$name,
-				$configuration['themeDir'],
 				$templateConfigurator,
 				$pathMasksProvider
 			]);

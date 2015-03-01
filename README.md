@@ -30,7 +30,8 @@ Now you can configure templates for your application in config file
 ```yaml
 themes:
 	themeName:
-		themeDir: %wwwDir%/../../ # this is only required item
+		themeDir: %wwwDir%/../../ # required
+		assetsDir: :themeDir:/assets # required
 		params:
 			# params
 		helpers:
@@ -49,6 +50,8 @@ All settings will be used only in own section.
 In masks you can use next placeholders:
 
 * `:themeDir:` - contains theme dir path
+* `:assetsDir:` - contains assets dir path for create temp copy into public directory. In templates
+now you can use `{$assestDir}` variable as base path for scripts, styles and etc... files
 * `:presenter:` - contains presenter name (without modules)
 * `:modules:` - contains module name (module name My:Module will be replaced to My/Module)
 * `:module_(number):` - contains module name (My:Module => module_1 = My, module_2 => Module)

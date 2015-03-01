@@ -8,8 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Kappa\ThemesManager;
+namespace Kappa\ThemesManager\Resolvers;
 
+use Kappa\ThemesManager\Theme;
+use Kappa\ThemesManager\ThemeRegistry;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
 

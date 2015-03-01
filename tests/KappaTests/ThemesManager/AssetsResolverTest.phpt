@@ -12,7 +12,7 @@
 
 namespace Kappa\ThemesManager\Tests;
 
-use Kappa\ThemesManager\AssetsResolver;
+use Kappa\ThemesManager\Resolvers\AssetsResolver;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use Tester\TestCase;

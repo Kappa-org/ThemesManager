@@ -18,7 +18,7 @@ $loader->addPsr4("KappaTests\\", __DIR__);
 // configure environment
 Tester\Environment::setup();
 
-define('DATA_DIR', __DIR__ . '/../data');
+define('DATA_DIR', realpath(__DIR__ . '/../data'));
 define('TEMP_DIR', __DIR__ . '/../temp/' . (isset($_SERVER['argv']) ? md5(serialize($_SERVER['argv'])) : getmypid()));
 Tester\Helpers::purge(TEMP_DIR);
 

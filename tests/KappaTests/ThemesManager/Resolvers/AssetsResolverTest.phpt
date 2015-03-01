@@ -10,7 +10,7 @@
  * @testCase
  */
 
-namespace Kappa\ThemesManager\Tests;
+namespace KappaTests\ThemesManager\Resolvers;
 
 use Kappa\ThemesManager\Resolvers\AssetsResolver;
 use org\bovigo\vfs\vfsStream;
@@ -18,7 +18,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use Tester\TestCase;
 use Tester\Assert;
 
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 /**
  * Class AssetsResolverTest

@@ -32,7 +32,7 @@ class ThemeTest extends TestCase
 
 	protected function setUp()
 	{
-		$configuratorMock = \Mockery::mock('alias:Kappa\ThemesManager\Template\TemplateConfigurator');
+		$configuratorMock = \Mockery::mock('Kappa\ThemesManager\Template\TemplateConfigurator');
 		$configuratorMock->shouldReceive('setParameter')->andReturnSelf();
 		$configuratorMock->shouldReceive('getParameter')->once()->with('themeDir')->andReturn(__DIR__);
 		$pathMapperFactoryMock = \Mockery::mock('Kappa\ThemesManager\Mapping\PathMapperFactory');

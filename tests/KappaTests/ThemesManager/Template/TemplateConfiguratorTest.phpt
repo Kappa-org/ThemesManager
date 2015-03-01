@@ -46,7 +46,8 @@ class TemplateConfiguratorTest extends TestCase
 	protected function setUp()
 	{
 		$this->params = [
-			'foo' => 'bar'
+			'foo' => 'bar',
+			'themeDir' => ''
 		];
 		$this->macros = [
 			'KappaTests\ThemesManager\Tests\Mocks\TestMacro'

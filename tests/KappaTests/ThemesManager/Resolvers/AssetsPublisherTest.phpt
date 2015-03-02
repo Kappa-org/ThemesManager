@@ -29,7 +29,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  * @package Kappa\ThemesManager\Tests
  * @author Ondřej Záruba <http://zaruba-ondrej.cz>
  */
-class AssetsResolverTest extends TestCase
+class AssetsPublisherTest extends TestCase
 {
 	/** @var AssetsPublisher */
 	private $assetsResolver;
@@ -98,4 +98,4 @@ class AssetsResolverTest extends TestCase
 	}
 }
 
-\run(new AssetsResolverTest());
+\run(new AssetsPublisherTest());

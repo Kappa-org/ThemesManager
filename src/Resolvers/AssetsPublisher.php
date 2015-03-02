@@ -52,7 +52,9 @@ class AssetsPublisher
 	{
 		/** @var Theme $theme */
 		foreach ($this->themeRegistry->getThemes() as $theme) {
-			$this->resolveTheme($theme);
+			if (file_exists($theme->getAssetsDir())) {
+				$this->resolveTheme($theme);
+			}
 		}
 	}
 

@@ -107,7 +107,7 @@ class AssetsPublisher
 	private function dropOldAssets($themeName)
 	{
 		/** @var \SplFileInfo $file */
-		foreach (Finder::findDirectories($themeName . '_')->in($this->getTargetDirectory()) as $file) {
+		foreach (Finder::findDirectories($themeName . '_*')->in($this->getTargetDirectory()) as $file) {
 			FileSystem::delete($file->getPathname());
 		}
 	}

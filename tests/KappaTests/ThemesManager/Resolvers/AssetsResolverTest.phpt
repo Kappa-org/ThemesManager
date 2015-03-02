@@ -12,7 +12,7 @@
 
 namespace KappaTests\ThemesManager\Resolvers;
 
-use Kappa\ThemesManager\Resolvers\AssetsResolver;
+use Kappa\ThemesManager\Resolvers\AssetsPublisher;
 use Kappa\ThemesManager\Template\TemplateConfigurator;
 use Mockery\MockInterface;
 use org\bovigo\vfs\vfsStream;
@@ -31,7 +31,7 @@ require_once __DIR__ . '/../../bootstrap.php';
  */
 class AssetsResolverTest extends TestCase
 {
-	/** @var AssetsResolver */
+	/** @var AssetsPublisher */
 	private $assetsResolver;
 
 	/** @var MockInterface */
@@ -58,7 +58,7 @@ class AssetsResolverTest extends TestCase
 		$themeRegistry = \Mockery::mock('Kappa\ThemesManager\ThemeRegistry');
 		$themeRegistry->shouldReceive('getThemes')->once()->withNoArgs()->andReturn([$this->theme]);
 
-		$this->assetsResolver = new AssetsResolver($themeRegistry, vfsStream::url('root/www'), 'assets');
+		$this->assetsResolver = new AssetsPublisher($themeRegistry, vfsStream::url('root/www'), 'assets');
 	}
 
 	public function testResolve()

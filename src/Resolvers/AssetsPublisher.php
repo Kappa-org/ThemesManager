@@ -22,7 +22,7 @@ use Nette\Utils\Finder;
  * @package Kappa\ThemesManager\Resolvers
  * @author Ondřej Záruba <http://zaruba-ondrej.cz>
  */
-class AssetsResolver
+class AssetsPublisher
 {
 	/** @var ThemeRegistry */
 	private $themeRegistry;

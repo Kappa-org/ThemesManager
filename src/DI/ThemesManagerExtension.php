@@ -49,7 +49,7 @@ class ThemesManagerExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('assetsResolver'))
-			->setClass('Kappa\ThemesManager\Resolvers\AssetsResolver', [
+			->setClass('Kappa\ThemesManager\Resolvers\AssetsPublisher', [
 				$this->prefix('@themeRegistry'),
 				$config['documentRoot'],
 				$config['assetsDir']
@@ -112,6 +112,6 @@ class ThemesManagerExtension extends CompilerExtension
 
 		// metoda initialize
 		$initialize = $class->methods['initialize'];
-		$initialize->addBody('$this->getService(?)->resolve();', [$builder->getByType('Kappa\ThemesManager\Resolvers\AssetsResolver')]);
+		$initialize->addBody('$this->getService(?)->resolve();', [$builder->getByType('Kappa\ThemesManager\Resolvers\AssetsPublisher')]);
 	}
 }

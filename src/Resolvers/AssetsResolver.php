@@ -19,7 +19,7 @@ use Nette\Utils\Finder;
 /**
  * Class AssetsResolver
  *
- * @package Kappa\ThemesManager
+ * @package Kappa\ThemesManager\Resolvers
  * @author Ondřej Záruba <http://zaruba-ondrej.cz>
  */
 class AssetsResolver

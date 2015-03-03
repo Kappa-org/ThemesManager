@@ -106,6 +106,9 @@ class ThemesManagerExtension extends CompilerExtension
 		}
 	}
 
+	/**
+	 * @param ClassType $class
+	 */
 	public function afterCompile(ClassType $class)
 	{
 		$builder = $this->getContainerBuilder();

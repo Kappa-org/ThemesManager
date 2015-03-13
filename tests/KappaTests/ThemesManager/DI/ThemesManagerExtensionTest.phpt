@@ -46,7 +46,7 @@ class ThemesManagerExtensionTest extends TestCase
 		Assert::same('foo', $theme->getName());
 		Assert::same(DATA_DIR, $theme->getThemeDir());
 		Assert::equal(['test'], $theme->getPathMapper()->getFormatTemplateFiles());
-		Assert::count(3, $theme->getTemplateConfigurator()->getParameters());
+		Assert::count(2, $theme->getTemplateConfigurator()->getParameters());
 		Assert::equal(['helper' => [new TestHelper(), 'process']], $theme->getTemplateConfigurator()->getHelpers());
 	}
 

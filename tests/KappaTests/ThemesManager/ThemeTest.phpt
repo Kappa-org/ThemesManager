@@ -51,11 +51,6 @@ class ThemeTest extends TestCase
 		Assert::same(__DIR__, $this->theme->getThemeDir());
 	}
 
-	public function testGetAssetsDir()
-	{
-		Assert::same(__DIR__ . '/../', $this->theme->getAssetsDir());
-	}
-
 	public function testGetPathMapper()
 	{
 		Assert::type('Kappa\ThemesManager\Mapping\PathMapper', $this->theme->getPathMapper());

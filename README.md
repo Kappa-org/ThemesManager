@@ -79,8 +79,8 @@ or classic
 ```php
 class BasePresenter extends Presenter
 {
-	/** @var \Kappa\ThemesManager\ThemesManager @inject */
-	public $themesManager;
+	/** @var \Kappa\ThemesManager\ThemesRegistry @inject */
+	public $themesRegistry;
 ```
 
 Update template:
@@ -92,10 +92,10 @@ public function getTemplateFactory()
 	// For kdyby/autowired
 	$templateFactory->setTheme($this->theme);
 	// Else
-	$theme = $this->themesManager->getTheme('admin');
+	$theme = $this->themesRegistry->getTheme('admin');
 	$templateFactory->setTheme($theme);
 
-    return $template;
+    return $templateFactory;
 }
 ```
 
@@ -106,7 +106,7 @@ Next you can use custom path masks. Example:
 ```php
 public function formatLayoutTemplateFiles()
 {
-    $list = $this->theme->getPathMapper->getFormatLayoutTemplateFiles();
+    $list = $this->theme->getPathMapper()->getFormatLayoutTemplateFiles();
 
     return $list;
 }

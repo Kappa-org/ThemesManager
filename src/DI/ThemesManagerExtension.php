@@ -73,6 +73,7 @@ class ThemesManagerExtension extends CompilerExtension
 			$templateConfigurator = new Statement('Kappa\ThemesManager\Template\TemplateConfigurator', [
 				array_merge($configuration['parameters'], [
 					'themeDir' => realpath($configuration['themeDir']),
+					'assetsDir' => realpath($configuration['assetsDir'])
 				]),
 				$configuration['helpers'],
 				$configuration['macros']

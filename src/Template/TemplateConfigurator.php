@@ -113,6 +113,7 @@ class TemplateConfigurator
 	{
 		foreach ($this->getParameters() as $name => $value) {
 			$value = str_replace(":themeDir:", $this->getParameter('themeDir'), $value);
+			$value = str_replace(":assetsDir:", $this->getParameter('assetsDir'), $value);
 			$template->add($name, $value);
 		}
 		foreach ($this->getHelpers() as $name => $helper) {
